@@ -1,0 +1,1 @@
+Mini messaging board. Second Odin Project using controllers and Views.
