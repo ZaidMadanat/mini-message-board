@@ -24,11 +24,26 @@ indexRouter.get("/", (req, res) => res.render("index", {title: "Mini Messageboar
 indexRouter.get("/new", (req, res) => res.render("form"))
 
 // Taking the request from the form and pushing it onto our messages. 
-indexRouter.post("/new", (req, res) => { 
-    messageText = req.body.messageText
-    user = req.body.user; 
+indexRouter.post("/new", (req, res) => {
+    // req.body gets me the data from the form 
+    const messageText = req.body.messageText;
+    const user = req.body.user;
     messages.push({text: messageText, user: user, added: new Date()});
     res.redirect("/");
 });
+
+
+// Creating the routing for a dynamic message. 
+indexRouter.get("/:user", getMessage)
+
+async function getMessage(req, res) { 
+    const { user } = req.params;
+    const message = messages.find((m) => m.user === user);
+
+    if (!message) { 
+        return res.status(404).send("Message not found");
+    }; 
+    res.render("message", {user: message.user, text: message.text, added: message.added});
+}
 
 module.exports = indexRouter;

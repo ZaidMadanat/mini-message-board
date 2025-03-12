@@ -6,14 +6,26 @@
     <title>Messages</title>
 </head>
 <body>
+    <!--I could have done a forEach function, for next time
+    as it is better practices, less code and more readable
+    -->
     <%=title%>
     <div class="all-messages">
         <% for( let i = 0; i < messages.length; i++ ) { %>
             <ul>
-                <li><%= messages[i].text %></li>
-                <li><%= messages[i].user %></li>
-                <li><%= messages[i].added %></li>
+                <li>
+                    <%= messages[i].text %>
+                </li>
+                <li>
+                    <%= messages[i].user %>
+                </li>
+                <li>
+                    <%= messages[i].added %>
+                </li>
             </ul>
+            <a href="/<%= messages[i].user %>">
+                <button>Open</button>
+              </a>
         <% } %>
     </div>
 </body>
